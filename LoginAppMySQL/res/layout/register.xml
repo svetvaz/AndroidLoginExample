@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/loyalty">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register to  LoyaltyPoints"
+            android:id="@+id/textView" android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFF"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="First Name"
+            android:id="@+id/textView2"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentLeft="true"
+            android:textSize="15dp"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/fname"
+            android:hint="First Name"
+            android:textColor="#FFFFFF"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="Last Name"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2"
+            android:layout_toLeftOf="@+id/textView"
+            android:textSize="15dp"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/lname"
+            android:hint="Last Name"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Email"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/textView3"
+            android:layout_alignRight="@+id/textView3"
+            android:textSize="15dp"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email"
+            android:hint="E-mail"
+            android:layout_below="@+id/lname"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Username"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/textView4"
+            android:layout_alignRight="@+id/textView4"
+            android:textSize="15dp"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/uname"
+            android:hint="Username"
+            android:layout_alignTop="@+id/textView5"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/pword"
+            android:hint="Password"
+            android:layout_alignLeft="@+id/uname"
+            android:layout_below="@+id/textView5"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Password"
+            android:id="@+id/textView6"
+            android:layout_alignTop="@+id/pword"
+            android:layout_alignRight="@+id/textView5"
+            android:textSize="15dp"/>
+
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Register"
+            android:id="@+id/register"
+            android:layout_below="@+id/textView6"
+            android:layout_alignRight="@+id/textView2"
+            android:textSize="13dp"/>
+
+    <Button
+            android:layout_width="175dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Back To Login"
+            android:id="@+id/bktologin"
+            android:layout_below="@+id/pword"
+            android:layout_alignParentRight="true"
+            android:textSize="13dp"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/register_error"
+            android:layout_below="@+id/register"
+            android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
+

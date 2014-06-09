@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/loyalty">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Congratulations. You have Sucessfully Registered..."
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView" android:layout_gravity="center"
+            android:textSize="15dp"
+            android:textAlignment="center"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="40dp"
+            android:text="Your Registration Details"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:textColor="#FFFFFF"
+            android:layout_height="40dp"
+            android:text="First Name"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentLeft="true"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/fname"
+            android:textColor="#FFFFFF"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="Last Name"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/textView3"
+            android:textSize="15dp"
+            android:layout_toLeftOf="@+id/fname"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/lname"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView3"
+            android:layout_toRightOf="@+id/textView5"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="E-mail"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView7"
+            android:layout_below="@+id/textView5"
+            android:layout_toLeftOf="@+id/textView2"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/email"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView5"
+            android:layout_alignLeft="@+id/fname"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="Username"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textView9"
+            android:layout_below="@+id/textView7"
+            android:textSize="15dp"
+            android:textIsSelectable="false"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/uname"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/email"
+            android:layout_alignLeft="@+id/email"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:text="Registered at"
+            android:id="@+id/textView11"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView9"
+            android:layout_toLeftOf="@+id/uname"
+            android:textSize="15dp"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/regat"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView9"
+            android:layout_alignRight="@+id/lname"
+            android:textSize="15dp"/>
+
+    <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Back to Login"
+            android:id="@+id/login"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView11"
+            android:textSize="13dp"
+            android:layout_alignRight="@+id/lname"
+            android:layout_alignParentLeft="true"/>
+
+</RelativeLayout>
