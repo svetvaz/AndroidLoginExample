@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Main extends Activity {
     Button btnLogout;
     Button changepas;
-
+    Button addbusiness;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class Main extends Activity {
 
         changepas = (Button) findViewById(R.id.btchangepass);
         btnLogout = (Button) findViewById(R.id.logout);
+        addbusiness = (Button) findViewById(R.id.btaddbusiness);
 
         DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
@@ -41,6 +42,17 @@ public class Main extends Activity {
                 Intent chgpass = new Intent(getApplicationContext(), ChangePassword.class);
 
                 startActivity(chgpass);
+            }
+
+        });
+        
+        
+        addbusiness.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+
+                Intent addbus = new Intent(getApplicationContext(), BusinessActivity.class);
+
+                startActivity(addbus);
             }
 
         });

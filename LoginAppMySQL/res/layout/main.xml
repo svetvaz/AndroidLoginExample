@@ -1,51 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/loyalty">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loyalty"
+    android:orientation="vertical" >
 
     <TextView
-            android:layout_width="200dp"
-            android:textColor="#FFFFFF"
-            android:layout_height="40dp"
-            android:id="@+id/textwelcome" android:textSize="20dp"/>
+        android:id="@+id/textwelcome"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="82dp"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/lname"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textwelcome"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
 
     <Button
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:text="Logout"
-            android:id="@+id/logout"
-            android:textSize="13dp"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/btchangepass"
-            android:layout_alignParentLeft="true"/>
+        android:id="@+id/Button02"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView"
+        android:text="View Rewards"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp" />
 
-    <TextView
-            android:layout_width="125dp"
-            android:layout_height="40dp"
-            android:id="@+id/lname"
-            android:layout_alignParentTop="true"
-            android:textColor="#FFFFFF"
-            android:layout_toRightOf="@+id/textwelcome"
-            android:textSize="20dp"/>
+    <Button
+        android:id="@+id/btaddbusiness"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Button02"
+        android:text="Add Business"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp" />
 
     <Button
         android:id="@+id/btchangepass"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textwelcome"
+        android:layout_below="@+id/btaddbusiness"
         android:text="Change Password"
         android:textColor="#FFFFFF"
         android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/btchangepass"
+        android:text="Logout"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp" />
+
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="User Panel"
-            android:id="@+id/textView" android:layout_below="@+id/logout" android:layout_alignParentRight="true"
-            android:textSize="18dp" android:textColor="#FFFFFF" android:textAlignment="center"/>
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@+id/textwelcome"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="33dp"
+        android:text="User Panel"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp" />
 
 </RelativeLayout>

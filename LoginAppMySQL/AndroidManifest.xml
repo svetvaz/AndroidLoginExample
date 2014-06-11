@@ -5,6 +5,9 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="9"
             android:targetSdkVersion="17"/>
+         <!-- Allow to connect with internet and to know the current network state-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />  
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
              
         <activity android:name="Login"
@@ -38,13 +41,14 @@
                   android:label="@string/app_name">
 
         </activity>
+         <activity android:name="com.svetlana.loginapp.BusinessActivity"
+                  android:label="@string/app_name">
 
+        </activity>
 
 
     </application>
-     <!-- Allow to connect with internet and to know the current network state-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />   
+ 
 
   
 </manifest>

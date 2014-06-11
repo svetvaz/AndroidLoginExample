@@ -19,10 +19,11 @@ public class UserFunctions {
     private JSONParser jsonParser;
 
     //URL of the PHP API
-    private static String loginURL = "http://192.168.1.224/svet_login_api/";
-    private static String registerURL = "http://192.168.1.224/svet_login_api/";
-    private static String forpassURL = "http://192.168.1.224/svet_login_api/";
-    private static String chgpassURL = "http://192.168.1.224/svet_login_api/";
+   // private static String loginURL = "http://192.168.1.224/svet_login_api/";
+    private static String loginURL = "http://goanhome.no-ip.info/svet_login_api/";
+    private static String registerURL = "http://goanhome.no-ip.info/svet_login_api/";
+    private static String forpassURL = "http://goanhome.no-ip.info/svet_login_api/";
+    private static String chgpassURL = "http://goanhome.no-ip.info/svet_login_api/";
 
 
     private static String login_tag = "login";

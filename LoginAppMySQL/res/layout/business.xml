@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loyalty"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/business_name_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="41dp"
+        android:ems="10"
+        android:hint="Business Name" />
+
+    <Button
+        android:id="@+id/addbusiness_btn_id"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/business_name_id"
+        android:text="Add"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/bktouserpanel"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/addbusiness_btn_id"
+        android:layout_alignBottom="@+id/addbusiness_btn_id"
+        android:layout_marginLeft="28dp"
+        android:layout_toRightOf="@+id/addbusiness_btn_id"
+        android:text="Back To User Panel"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp" />
+    
+     <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/business_add_error"
+            android:layout_below="@+id/business"
+            android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

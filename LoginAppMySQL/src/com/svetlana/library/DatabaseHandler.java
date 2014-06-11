@@ -1,9 +1,6 @@
 package com.svetlana.library;
 
-
-
-
-
+import java.util.HashMap;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,13 +8,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.HashMap;
+
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 6;
 
     // Database Name
     private static final String DATABASE_NAME = "advandroid";
@@ -31,9 +28,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LASTNAME = "lname";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_USERNAME = "uname";
-    private static final String KEY_UID = "uid";
+    public static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
+	public static final String TABLE_BUSINESS = "business";
+	public static final String BUSINESS_ID = "bid";
+	public static final String BUSINESS_NAME = "businessname";
+	public static final String TABLE_POINTS = "points";
+	public static final String POINTS_ID = "pid";
+	public static final String POINTS = "pointvalues";
+		// TABLE CREATION STATEMENT
 
+		private static final String CREATE_BUSINESS_TABLE = "create table " + TABLE_BUSINESS
+				+ "(" + BUSINESS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ BUSINESS_NAME + " TEXT NOT NULL, " + "UNIQUE(" + BUSINESS_NAME + ")););";
+		
+		private static final String CREATE_POINTS_TABLE = "create table " + TABLE_POINTS
+				+ "(" + POINTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ BUSINESS_NAME + " TEXT NOT NULL, "+ KEY_UID + " TEXT NOT NULL, "+ POINTS + " INTEGER);";
+
+
+	
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -50,6 +64,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_UID + " TEXT,"
                 + KEY_CREATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
+        db.execSQL(CREATE_BUSINESS_TABLE);
+        db.execSQL(CREATE_POINTS_TABLE);
+
     }
 
     // Upgrading database
@@ -57,7 +74,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSINESS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINTS);
         // Create tables again
         onCreate(db);
     }
@@ -78,6 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         // Inserting Row
         db.insert(TABLE_LOGIN, null, values);
+//        db.execSQL(CREATE_BUSINESS_TABLE);
         db.close(); // Closing database connection
     }
 
@@ -106,10 +125,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return user
         return user;
     }
-
-
-
-
+    
 
 
     /**
@@ -137,7 +153,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         // Delete All Rows
         db.delete(TABLE_LOGIN, null, null);
+//        db.delete(TABLE_BUSINESS, null, null);
         db.close();
     }
+    
+    
+
+
 
 }

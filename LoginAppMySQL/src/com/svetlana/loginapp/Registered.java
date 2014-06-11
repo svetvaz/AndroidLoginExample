@@ -1,10 +1,6 @@
 package com.svetlana.loginapp;
 
-/**
- * Author :Raj Amal
- * Email  :raj.amalw@learn2crack.com
- * Website:www.learn2crack.com
- **/
+
 
 import android.app.Activity;
 import android.content.Intent;

@@ -4,11 +4,14 @@ package com.svetlana.loginapp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -191,6 +194,15 @@ public class Login extends Activity {
             return json;
         }
 
+        
+        public void savePreferences(String key, String value)
+        {
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), 0);
+            prefs.edit().putString(key, value).commit();
+        }
+
+
+        
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
@@ -209,7 +221,8 @@ public class Login extends Activity {
                         UserFunctions logout = new UserFunctions();
                         logout.logoutUser(getApplicationContext());
                         db.addUser(json_user.getString(KEY_FIRSTNAME),json_user.getString(KEY_LASTNAME),json_user.getString(KEY_EMAIL),json_user.getString(KEY_USERNAME),json_user.getString(KEY_UID),json_user.getString(KEY_CREATED_AT));
-                       /**
+                        savePreferences("USER_ID", json_user.getString(KEY_UID));
+                        /**
                         *If JSON array details are stored in SQlite it launches the User Panel.
                         **/
                         Intent upanel = new Intent(getApplicationContext(), Main.class);
