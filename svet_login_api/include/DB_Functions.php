@@ -54,6 +54,23 @@ return false;
 }
 
 }
+
+public function updatepoints($userid, $businessname, $newpoints){
+
+  $result = mysql_query("UPDATE `points` SET `pointvalues` = '$newpoints' WHERE `uid` = '$userid'");
+
+if ($result) {
+ 
+return true;
+
+}
+else
+{
+return false;
+}
+
+}
+
 /**
      * Adding new user to mysql database
      * returns user details
@@ -117,6 +134,7 @@ public function getPointsByUid($uid) {
         }
 
 }
+
 
  /**
      * Checks whether the email is valid or fake

@@ -34,14 +34,24 @@
             android:text="Change Password"
             android:textColor="#FFFFFF"
             android:textSize="13dp" />
+        
+        
+           <Button
+            android:id="@+id/btupdatepoints"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btchangepass"
+            android:text="Update Points"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/logout"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/btchangepass"
-            android:layout_marginTop="16dp"
+            android:layout_below="@+id/btupdatepoints"
             android:text="Logout"
             android:textColor="#FFFFFF"
             android:textSize="13dp" />

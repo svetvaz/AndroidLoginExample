@@ -6,5 +6,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="About">About</string>
     <string name="Help">Help</string>
+    <string-array name="types">
+     <item>Type 1</item>
+     <item>Type 2</item>
+     <item>Type 3</item>
+    </string-array>
+    <string-array name="types_values">
+     <item>1</item>
+     <item>2</item>
+     <item>3</item>
+    </string-array>
 
 </resources>

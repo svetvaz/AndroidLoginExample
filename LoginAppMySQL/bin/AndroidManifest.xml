@@ -45,6 +45,11 @@
                   android:label="@string/app_name">
 
         </activity>
+        
+       <activity android:name="UpdatePoints"
+                  android:label="@string/app_name">
+
+        </activity>
          <activity android:name="com.svetlana.loginapp.BusinessActivity"
                   android:label="@string/app_name">
 

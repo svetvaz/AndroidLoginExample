@@ -1,9 +1,7 @@
 <?php
-
 /**
  PHP API for Login, Register, Changepassword, Resetpassword Requests and for Email Notifications.
  **/
-
 if (isset($_POST['tag']) && $_POST['tag'] != '') {
     // Get tag
     $tag = $_POST['tag'];
@@ -43,7 +41,32 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["error_msg"] = "Incorrect email or password!";
             echo json_encode($response);
         }
-    }  
+    }
+else if($tag=='updatepoints'){
+$uid = $_POST['uid'];
+$newpoints = $_POST['newpoints'];
+$businessname = $_POST['businessname'];
+$email= $_POST['email'];
+if ($db->isUserExisted($email)) {
+
+$result = $db->updatepoints($uid, $businessname, $newpoints);
+if ($result) {
+         $response["success"] = 1;
+          echo json_encode($response);
+}
+else {
+$response["error"] = 1;
+echo json_encode($response);
+}          
+        } 
+           else {
+
+            $response["error"] = 2;
+            $response["error_msg"] = "User does not exist";
+             echo json_encode($response);
+
+}
+}
   else if ($tag == 'chgpass'){
   $email = $_POST['email'];
 

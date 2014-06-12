@@ -8,6 +8,12 @@
 package com.svetlana.loginapp;
 
 public final class R {
+    public static final class array {
+        public static final int types=0x7f040002;
+        public static final int types_values=0x7f040003;
+        public static final int updateInterval=0x7f040000;
+        public static final int updateIntervalValues=0x7f040001;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -18,8 +24,8 @@ public final class R {
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int android=0x7f020000;
@@ -27,68 +33,72 @@ public final class R {
         public static final int loyalty=0x7f020002;
     }
     public static final class id {
-        public static final int about=0x7f080027;
-        public static final int action_settings=0x7f080026;
-        public static final int alert=0x7f080013;
-        public static final int alertpass=0x7f08000d;
-        public static final int bktolog=0x7f080014;
-        public static final int bktologin=0x7f08001e;
-        public static final int bktomenu=0x7f080025;
-        public static final int btcancel=0x7f08000c;
-        public static final int btchangepass=0x7f08000b;
-        public static final int btviewrewards=0x7f08000e;
-        public static final int email=0x7f080001;
-        public static final int fname=0x7f080017;
-        public static final int forpas=0x7f080011;
-        public static final int generateqrcode=0x7f08000f;
-        public static final int help=0x7f080028;
-        public static final int imageView1=0x7f080016;
-        public static final int lname=0x7f080018;
-        public static final int login=0x7f080002;
-        public static final int loginErrorMsg=0x7f080005;
-        public static final int logout=0x7f080010;
-        public static final int newpass=0x7f08000a;
-        public static final int passres=0x7f080006;
-        public static final int pword=0x7f080004;
-        public static final int pworda=0x7f080008;
-        public static final int regat=0x7f080023;
-        public static final int register=0x7f08001d;
-        public static final int register_error=0x7f08001f;
-        public static final int registerbtn=0x7f080003;
-        public static final int respass=0x7f080012;
-        public static final int tableLayout1=0x7f080024;
-        public static final int textView=0x7f080000;
-        public static final int textView1=0x7f080015;
-        public static final int textView11=0x7f080022;
-        public static final int textView2=0x7f080007;
-        public static final int textView3=0x7f080009;
-        public static final int textView4=0x7f080019;
-        public static final int textView5=0x7f08001a;
-        public static final int textView6=0x7f08001c;
-        public static final int textView7=0x7f080020;
-        public static final int textView9=0x7f080021;
-        public static final int uname=0x7f08001b;
+        public static final int about=0x7f090029;
+        public static final int action_settings=0x7f090028;
+        public static final int alert=0x7f090014;
+        public static final int alertpass=0x7f09000d;
+        public static final int bktolog=0x7f090015;
+        public static final int bktologin=0x7f09001f;
+        public static final int bktomenu=0x7f090026;
+        public static final int btcancel=0x7f09000c;
+        public static final int btchangepass=0x7f09000b;
+        public static final int btupdatepoints=0x7f090010;
+        public static final int btviewrewards=0x7f09000e;
+        public static final int email=0x7f090001;
+        public static final int fname=0x7f090018;
+        public static final int forpas=0x7f090012;
+        public static final int generateqrcode=0x7f09000f;
+        public static final int help=0x7f09002a;
+        public static final int imageView1=0x7f090017;
+        public static final int lname=0x7f090019;
+        public static final int login=0x7f090002;
+        public static final int loginErrorMsg=0x7f090005;
+        public static final int logout=0x7f090011;
+        public static final int newpass=0x7f09000a;
+        public static final int newpoints=0x7f090027;
+        public static final int passres=0x7f090006;
+        public static final int pword=0x7f090004;
+        public static final int pworda=0x7f090008;
+        public static final int regat=0x7f090024;
+        public static final int register=0x7f09001e;
+        public static final int register_error=0x7f090020;
+        public static final int registerbtn=0x7f090003;
+        public static final int respass=0x7f090013;
+        public static final int tableLayout1=0x7f090025;
+        public static final int textView=0x7f090000;
+        public static final int textView1=0x7f090016;
+        public static final int textView11=0x7f090023;
+        public static final int textView2=0x7f090007;
+        public static final int textView3=0x7f090009;
+        public static final int textView4=0x7f09001a;
+        public static final int textView5=0x7f09001b;
+        public static final int textView6=0x7f09001d;
+        public static final int textView7=0x7f090021;
+        public static final int textView9=0x7f090022;
+        public static final int uname=0x7f09001c;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int changepassword=0x7f030001;
         public static final int main=0x7f030002;
         public static final int passwordreset=0x7f030003;
-        public static final int qrcode=0x7f030004;
-        public static final int register=0x7f030005;
-        public static final int registered=0x7f030006;
-        public static final int rewardlist=0x7f030007;
+        public static final int preferences=0x7f030004;
+        public static final int qrcode=0x7f030005;
+        public static final int register=0x7f030006;
+        public static final int registered=0x7f030007;
+        public static final int rewardlist=0x7f030008;
+        public static final int updatepoints=0x7f030009;
     }
     public static final class menu {
-        public static final int login=0x7f070000;
-        public static final int options_menu=0x7f070001;
+        public static final int login=0x7f080000;
+        public static final int options_menu=0x7f080001;
     }
     public static final class string {
-        public static final int About=0x7f050003;
-        public static final int Help=0x7f050004;
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
+        public static final int About=0x7f060003;
+        public static final int Help=0x7f060004;
+        public static final int action_settings=0x7f060001;
+        public static final int app_name=0x7f060000;
+        public static final int hello_world=0x7f060002;
     }
     public static final class style {
         /** 
@@ -119,7 +129,7 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
  Application theme. 
@@ -127,6 +137,6 @@ public final class R {
  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

@@ -87,6 +87,7 @@ public class Login extends Activity {
 	class IncomingHandler extends Handler {
 		 @Override
 		 public void handleMessage(Message msg) {
+
 			 switch(msg.what) {
 			 case DatabaseSyncService.MSG_DB_SYNCED:
 				 final ProgressDialog pDialog =  new ProgressDialog(Login.this);

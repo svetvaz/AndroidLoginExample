@@ -21,12 +21,13 @@ public class UserFunctions {
     private static String forpassURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String chgpassURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String pointsURL = "http://goanhome.no-ip.info/svet_login_api/";
-
+    private static String updatepoints_URL= "http://goanhome.no-ip.info/svet_login_api/";
 
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String forpass_tag = "forpass";
     private static String chgpass_tag = "chgpass";
+    private static String updatepoints_tag = "updatepoints";
     private static String points_tag = "points";
 
 
@@ -63,7 +64,20 @@ public class UserFunctions {
     }
 
 
+    /**
+     * Function to update points
+     **/
 
+    public JSONObject updatePoints(String newpoints, String uid, String businessname,String email){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", updatepoints_tag));
+        params.add(new BasicNameValuePair("newpoints", newpoints));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("businessname", businessname));
+        params.add(new BasicNameValuePair("email", email));
+        JSONObject json = jsonParser.getJSONFromUrl(updatepoints_URL, params);
+        return json;
+    }
 
 
     /**
