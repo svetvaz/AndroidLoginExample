@@ -7,17 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import com.svetlana.library.UserFunctions;
-import com.svetlana.library.DatabaseHandler;
 
-import java.util.HashMap;
+import com.svetlana.library.UserFunctions;
 
 public class Main extends Activity {
     Button btnLogout;
     Button changepas;
-    Button addbusiness;
-
+    Button viewrewards;
+    Button generateqrcode;
+    
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,15 +24,16 @@ public class Main extends Activity {
 
         changepas = (Button) findViewById(R.id.btchangepass);
         btnLogout = (Button) findViewById(R.id.logout);
-        addbusiness = (Button) findViewById(R.id.btaddbusiness);
+        viewrewards = (Button) findViewById(R.id.btviewrewards);
+        generateqrcode = (Button) findViewById(R.id.generateqrcode);
 
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
+//        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 
         /**
          * Hashmap to load data from the Sqlite database
          **/
-         HashMap<String,String> user = new HashMap<String, String>();
-         user = db.getUserDetails();
+ 
+//         us db.getUserDetails();
 
 
         changepas.setOnClickListener(new View.OnClickListener(){
@@ -47,12 +47,24 @@ public class Main extends Activity {
         });
         
         
-        addbusiness.setOnClickListener(new View.OnClickListener(){
+        viewrewards.setOnClickListener(new View.OnClickListener(){
             public void onClick(View arg0){
 
-                Intent addbus = new Intent(getApplicationContext(), BusinessActivity.class);
+                Intent viewrew = new Intent(getApplicationContext(), Reward.class);
 
-                startActivity(addbus);
+                startActivity(viewrew);
+            }
+
+        });
+        
+        
+        
+        generateqrcode.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View arg0){
+
+                Intent generateQrCode = new Intent(getApplicationContext(), GenerateQRCodeActivity.class);
+
+                startActivity(generateQrCode);
             }
 
         });
@@ -75,10 +87,7 @@ public class Main extends Activity {
 /**
  * Sets user first name and last name in text view.
  **/
-        final TextView login = (TextView) findViewById(R.id.textwelcome);
-        login.setText("Welcome  "+user.get("fname"));
-        final TextView lname = (TextView) findViewById(R.id.lname);
-        lname.setText(user.get("lname"));
+        
 
 
     }}

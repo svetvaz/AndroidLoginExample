@@ -2,30 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/loyalty"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textwelcome"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="82dp"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/lname"
-        android:layout_width="125dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textwelcome"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
-
     <Button
-        android:id="@+id/Button02"
+        android:id="@+id/btviewrewards"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
@@ -34,46 +14,36 @@
         android:textColor="#FFFFFF"
         android:textSize="13dp" />
 
-    <Button
-        android:id="@+id/btaddbusiness"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Button02"
-        android:text="Add Business"
-        android:textColor="#FFFFFF"
-        android:textSize="13dp" />
+        <Button
+            android:id="@+id/generateqrcode"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/btviewrewards"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="Generate QR Code"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
 
-    <Button
-        android:id="@+id/btchangepass"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btaddbusiness"
-        android:text="Change Password"
-        android:textColor="#FFFFFF"
-        android:textSize="13dp" />
+        <Button
+            android:id="@+id/btchangepass"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/generateqrcode"
+            android:text="Change Password"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/btchangepass"
-        android:text="Logout"
-        android:textColor="#FFFFFF"
-        android:textSize="13dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:layout_alignBottom="@+id/textwelcome"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="33dp"
-        android:text="User Panel"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btchangepass"
+            android:layout_marginTop="16dp"
+            android:text="Logout"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
 
 </RelativeLayout>

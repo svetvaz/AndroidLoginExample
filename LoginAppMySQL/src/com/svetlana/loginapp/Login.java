@@ -2,18 +2,15 @@ package com.svetlana.loginapp;
 
 
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +20,6 @@ import android.widget.Toast;
 
 import com.svetlana.library.DatabaseHandler;
 import com.svetlana.library.UserFunctions;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Login extends Activity {
 
@@ -47,8 +39,9 @@ public class Login extends Activity {
     private static String KEY_LASTNAME = "lname";
     private static String KEY_EMAIL = "email";
     private static String KEY_CREATED_AT = "created_at";
-
-
+    private static String BUSINESS_NAME = "businessname";
+    private static String POINTS = "pointvalues";
+    private static String UPDATED_AT = "updated_at";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,29 +117,31 @@ public class Login extends Activity {
    
         @Override
         protected Boolean doInBackground(String... args){
-
-
-
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()) {
-                try {
-                    URL url = new URL("http://www.google.com");
-                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-                    urlc.setConnectTimeout(3000);
-                    urlc.connect();
-                    if (urlc.getResponseCode() == 200) {
-                        return true;
-                    }
-                } catch (MalformedURLException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            return false;
+        	
+        	
+//
+//
+//
+//            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+//            if (netInfo != null && netInfo.isConnected()) {
+//                try {
+//                    URL url = new URL("http://www.google.com");
+//                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+//                    urlc.setConnectTimeout(3000);
+//                    urlc.connect();
+//                    if (urlc.getResponseCode() == 200) {
+//                        return true;
+//                    }
+//                } catch (MalformedURLException e1) {
+//                    // TODO Auto-generated catch block
+//                    e1.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+           return true;
 
         }
         @Override
@@ -222,6 +217,16 @@ public class Login extends Activity {
                         logout.logoutUser(getApplicationContext());
                         db.addUser(json_user.getString(KEY_FIRSTNAME),json_user.getString(KEY_LASTNAME),json_user.getString(KEY_EMAIL),json_user.getString(KEY_USERNAME),json_user.getString(KEY_UID),json_user.getString(KEY_CREATED_AT));
                         savePreferences("USER_ID", json_user.getString(KEY_UID));
+                        
+                        // Now load the points table
+                      //  UserFunctions userFunction = new UserFunctions();
+                        //JSONObject json_points = userFunction.userPoints(json_user.getString(KEY_UID));
+//                       JSONObject json_points = json.getJSONObject("points");
+                        JSONArray points = json_user.getJSONArray("points");
+                       for(int i=0;i<points.length();i++){
+                    	   JSONObject obj = (JSONObject)points.get(i);
+                    	   db.setPoints(obj.getString(KEY_UID),obj.getString(BUSINESS_NAME),obj.getString(POINTS),obj.getString(UPDATED_AT));
+                       }
                         /**
                         *If JSON array details are stored in SQlite it launches the User Panel.
                         **/

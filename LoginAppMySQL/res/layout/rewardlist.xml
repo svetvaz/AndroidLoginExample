@@ -1,32 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-   <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/business_name_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Business Name" />
-
-
-
-        <Button
-            android:id="@+id/addbusiness_btn_id"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Add" />
-    </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+   
 
         <TableLayout
             android:id="@+id/tableLayout1"
@@ -34,8 +12,15 @@
             android:layout_height="match_parent"
             android:padding="10dp"
             android:shrinkColumns="*"
-            android:stretchColumns="*" >
-        </TableLayout>
-    </ScrollView>
+             android:layout_below="@+id/bktomenu"
+            android:stretchColumns="*" >  </TableLayout>
 
-</LinearLayout>
+    <Button
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:textColor="#FFFFFF"
+            android:text="Back To Main Menu"
+            android:id="@+id/bktomenu"
+            android:layout_below="@+id/pword"
+            android:textSize="13dp"/>
+</RelativeLayout>

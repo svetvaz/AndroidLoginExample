@@ -4,9 +4,12 @@ package com.svetlana.loginapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
@@ -28,13 +31,23 @@ public class Reward extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.business);
+		setContentView(R.layout.rewardlist);
 
 		sqlcon = new SQLController(this);
 
 		table_layout = (TableLayout) findViewById(R.id.tableLayout1);
 
 		BuildTable();
+		
+		 Button backtoMenu = (Button) findViewById(R.id.bktomenu);
+		 backtoMenu.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View view) {
+	                Intent myIntent = new Intent(view.getContext(), Main.class);
+	                startActivityForResult(myIntent, 0);
+	                finish();
+	            }
+
+	        });
 
 
 	}

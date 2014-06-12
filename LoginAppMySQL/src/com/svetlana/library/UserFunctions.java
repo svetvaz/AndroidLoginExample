@@ -1,10 +1,6 @@
 package com.svetlana.library;
 
-/**
- * Author :Raj Amal
- * Email  :raj.amalw@learn2crack.com
- * Website:www.learn2crack.com
- **/
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +20,14 @@ public class UserFunctions {
     private static String registerURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String forpassURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String chgpassURL = "http://goanhome.no-ip.info/svet_login_api/";
+    private static String pointsURL = "http://goanhome.no-ip.info/svet_login_api/";
 
 
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String forpass_tag = "forpass";
     private static String chgpass_tag = "chgpass";
+    private static String points_tag = "points";
 
 
     // constructor
@@ -102,6 +100,17 @@ public class UserFunctions {
         return json;
     }
 
+    
+
+    public JSONObject userPoints(String uid){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", points_tag));
+        params.add(new BasicNameValuePair("uid", uid));
+        JSONObject json = jsonParser.getJSONFromUrl(pointsURL, params);
+        return json;
+    }
+    
 
     /**
      * Function to logout user
@@ -112,6 +121,8 @@ public class UserFunctions {
         db.resetTables();
         return true;
     }
+    
+    
 
 }
 
