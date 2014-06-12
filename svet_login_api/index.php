@@ -32,8 +32,10 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
 	    $response["user"]["uname"] = $user["username"];
             $response["user"]["uid"] = $user["unique_id"];
             $response["user"]["created_at"] = $user["created_at"];
-            
+            $points = $db->getPointsByUid($user["unique_id"]);
+	    $response["user"]["points"] = $points;	
             echo json_encode($response);
+	    
         } else {
             // user not found
             // echo json with error = 1
@@ -41,7 +43,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["error_msg"] = "Incorrect email or password!";
             echo json_encode($response);
         }
-    } 
+    }  
   else if ($tag == 'chgpass'){
   $email = $_POST['email'];
 

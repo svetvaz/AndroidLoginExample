@@ -100,6 +100,24 @@ return false;
         }
     }
 
+public function getPointsByUid($uid) {
+	 $result = mysql_query("SELECT * FROM points WHERE uid = '$uid'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+		$rows = Array();
+		while($row = mysql_fetch_array($result)){
+  			array_push($rows, $row);
+			}
+           
+	    return $rows;
+        } else {
+            // no points found
+            return false;
+        }
+
+}
+
  /**
      * Checks whether the email is valid or fake
      */
