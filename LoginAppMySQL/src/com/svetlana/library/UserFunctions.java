@@ -56,7 +56,6 @@ public class UserFunctions {
     public JSONObject chgPass(String newpas, String email){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", chgpass_tag));
-
         params.add(new BasicNameValuePair("newpas", newpas));
         params.add(new BasicNameValuePair("email", email));
         JSONObject json = jsonParser.getJSONFromUrl(chgpassURL, params);

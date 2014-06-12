@@ -7,7 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -89,8 +92,37 @@ public class Reward extends Activity {
 			table_layout.addView(row);
 
 		}
+		
+		registerForContextMenu(table_layout);
 		sqlcon.close();
 	}
+	
+	@Override 
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
+    {
+            super.onCreateContextMenu(menu, v, menuInfo);
+            menu.setHeaderTitle("Select The Action");  
+            menu.add(0, v.getId(), 0, "Go Back to Main Menu");  
 
+    } 
+	
+	
+	@Override  
+    public boolean onContextItemSelected(MenuItem item)
+    {  
+
+                        if(item.getTitle()=="Go Back to Main Menu")
+                        {
+                        	Intent myIntent = new Intent(getApplicationContext(), Main.class);
+        	                startActivityForResult(myIntent, 0);
+        	                finish();
+                        }                  
+                        else 
+                        {
+                            return false;
+                        }  
+                        return true;  
+                           
+      }  
 
 }

@@ -5,8 +5,12 @@ package com.svetlana.loginapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.svetlana.library.UserFunctions;
 
@@ -90,4 +94,27 @@ public class Main extends Activity {
         
 
 
-    }}
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return true;
+      }
+    
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.about:
+              Toast.makeText(this, "You have chosen the " + getResources().getString(R.string.About) + " menu option",
+                          Toast.LENGTH_SHORT).show();
+              return true;
+        default:
+              return super.onOptionsItemSelected(item);
+        }
+        
+    }
+
+
+
+}

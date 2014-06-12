@@ -4,5 +4,7 @@
     <string name="app_name">LoyaltyPoints</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="About">About</string>
+    <string name="Help">Help</string>
 
 </resources>

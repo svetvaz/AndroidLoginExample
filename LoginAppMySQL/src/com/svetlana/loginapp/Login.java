@@ -2,24 +2,29 @@ package com.svetlana.loginapp;
 
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.svetlana.library.DatabaseHandler;
-import com.svetlana.library.UserFunctions;
+
+
+
 
 public class Login extends Activity {
 
@@ -29,37 +34,136 @@ public class Login extends Activity {
     EditText inputEmail;
     EditText inputPassword;
     private TextView loginErrorMsg;
+	Activity mlogin = null;
+	DatabaseSyncService dss = null;
     /**
      * Called when the activity is first created.
      */
-    private static String KEY_SUCCESS = "success";
-    private static String KEY_UID = "uid";
-    private static String KEY_USERNAME = "uname";
-    private static String KEY_FIRSTNAME = "fname";
-    private static String KEY_LASTNAME = "lname";
-    private static String KEY_EMAIL = "email";
-    private static String KEY_CREATED_AT = "created_at";
-    private static String BUSINESS_NAME = "businessname";
-    private static String POINTS = "pointvalues";
-    private static String UPDATED_AT = "updated_at";
+//    private static String KEY_SUCCESS = "success";
+//    private static String KEY_UID = "uid";
+//    private static String KEY_USERNAME = "uname";
+//    private static String KEY_FIRSTNAME = "fname";
+//    private static String KEY_LASTNAME = "lname";
+//    private static String KEY_EMAIL = "email";
+//    private static String KEY_CREATED_AT = "created_at";
+//    private static String BUSINESS_NAME = "businessname";
+//    private static String POINTS = "pointvalues";
+//    private static String UPDATED_AT = "updated_at";
+	private final static int SYNC_DB = 1;
+    private final static int MSG_REGISTER_CLIENT = 2;
+	private final static String SYNC_MSG_KEY = "com.svetlana.loginapp.SYNC_MSG";
+	private final static String TAG = "Login";
+//	private final static String POINTS_DATA="pointsData";
+    
+	private final static Intent mDatabaseSyncServiceIntent = new Intent("com.svetlana.loginapp.DatabaseSyncService");
+	private Messenger mMessengerToDatabaseSyncservice=null;
+	private boolean mIsBound;
+	final Messenger mMessenger = new Messenger(new IncomingHandler());
+	
+	
+    private ServiceConnection mConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mMessengerToDatabaseSyncservice = new Messenger(service);
+			try {
+				Message msg = Message.obtain(null, Login.MSG_REGISTER_CLIENT);
+				msg.replyTo = mMessenger;
+				if(mMessengerToDatabaseSyncservice != null) {
+					mMessengerToDatabaseSyncservice.send(msg);
+				}
+			}
+			catch(RemoteException e) {}
+			mIsBound = true;			
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			mMessengerToDatabaseSyncservice = null;
+			mIsBound = false;			
+		}
+	};
+
+	@SuppressLint("HandlerLeak")
+	class IncomingHandler extends Handler {
+		 @Override
+		 public void handleMessage(Message msg) {
+			 switch(msg.what) {
+			 case DatabaseSyncService.MSG_DB_SYNCED:
+				 final ProgressDialog pDialog =  new ProgressDialog(Login.this);
+	             Bundle data = msg.getData();
+	             if((int)data.get("result")==RESULT_OK){
+	             pDialog.setMessage("Loading User Space");
+	             pDialog.setTitle("Getting Data");
+				 Toast.makeText(getApplicationContext(),
+			              "Sync Complete",Toast.LENGTH_SHORT).show();
+				 Intent upanel = new Intent(getApplicationContext(), Main.class);
+                 upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                 pDialog.dismiss();
+                 startActivity(upanel);
+                 /**
+                  * Close Login Screen
+                  **/
+                 finish();
+	             }
+	             else{
+	            	 pDialog.dismiss();
+	               	 Toast.makeText(Login.this, "Login failed",
+				     Toast.LENGTH_LONG).show();
+	                    loginErrorMsg.setText("Incorrect username/password");
+	             }
+				 break;
+			 default:
+				 super.handleMessage(msg);
+			 }
+		 }
+	 }
+	
+	 
+	
+	  
+	  @Override
+		protected void onResume() {
+			super.onResume();
+			bindService(mDatabaseSyncServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+			
+		}
+		
+		@Override
+		protected void onPause() {
+			if(mIsBound)
+				unbindService(mConnection);
+			
+			super.onPause();
+		}
+		
+		@Override
+		protected void onDestroy() {
+			super.onDestroy();
+		
+		}
+		
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-
+        Intent intent = mDatabaseSyncServiceIntent;
+	    getApplicationContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	    
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.pword);
         Btnregister = (Button) findViewById(R.id.registerbtn);
         btnLogin = (Button) findViewById(R.id.login);
         passreset = (Button)findViewById(R.id.passres);
         loginErrorMsg = (TextView) findViewById(R.id.loginErrorMsg);
-
+        mlogin = this;
         passreset.setOnClickListener(new View.OnClickListener() {
         public void onClick(View view) {
         Intent myIntent = new Intent(view.getContext(), PasswordReset.class);
         startActivityForResult(myIntent, 0);
         finish();
+        
         }});
 
 
@@ -77,7 +181,23 @@ public class Login extends Activity {
 
                 if (  ( !inputEmail.getText().toString().equals("")) && ( !inputPassword.getText().toString().equals("")) )
                 {
-                    NetAsync(view);
+                	 if( mIsBound ) {
+     			    	// Create Message
+     			    	Message msg = Message.obtain(null, SYNC_DB);
+     			    	Bundle bundle = new Bundle();
+     			    	bundle.putString(SYNC_MSG_KEY, "syncdatabase");
+     			    	bundle.putString("email", inputEmail.getText().toString());
+     			    	bundle.putString("password", inputPassword.getText().toString());
+     			    	msg.setData(bundle);
+     			    	try {
+     			    		mMessengerToDatabaseSyncservice.send(msg);
+     			    	}
+     			    	catch(RemoteException re) {
+     			    		Log.e(TAG,re.toString());
+     			    	}
+     					Toast.makeText(getApplicationContext(), "Logging in ", Toast.LENGTH_LONG).show();
+     			    }
+                 
                 }
                 else if ( ( !inputEmail.getText().toString().equals("")) )
                 {
@@ -100,156 +220,5 @@ public class Login extends Activity {
 
 
 
-    private class NetCheck extends AsyncTask<String,String,Boolean>
-    {
-        private ProgressDialog nDialog;
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            nDialog = new ProgressDialog(Login.this);
-            nDialog.setTitle("Checking Network");
-            nDialog.setMessage("Loading..");
-            nDialog.setIndeterminate(false);
-            nDialog.setCancelable(true);
-            nDialog.show();
-        }
    
-        @Override
-        protected Boolean doInBackground(String... args){
-        	
-        	
-//
-//
-//
-//            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//            if (netInfo != null && netInfo.isConnected()) {
-//                try {
-//                    URL url = new URL("http://www.google.com");
-//                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-//                    urlc.setConnectTimeout(3000);
-//                    urlc.connect();
-//                    if (urlc.getResponseCode() == 200) {
-//                        return true;
-//                    }
-//                } catch (MalformedURLException e1) {
-//                    // TODO Auto-generated catch block
-//                    e1.printStackTrace();
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
-           return true;
-
-        }
-        @Override
-        protected void onPostExecute(Boolean th){
-
-            if(th == true){
-                nDialog.dismiss();
-                new ProcessLogin().execute();
-            }
-            else{
-                nDialog.dismiss();
-                loginErrorMsg.setText("Error in Network Connection");
-            }
-        }
-    }
-
-    private class ProcessLogin extends AsyncTask<String, String, JSONObject> {
-
-
-        private ProgressDialog pDialog;
-
-        String email,password;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            inputEmail = (EditText) findViewById(R.id.email);
-            inputPassword = (EditText) findViewById(R.id.pword);
-            email = inputEmail.getText().toString();
-            password = inputPassword.getText().toString();
-            pDialog = new ProgressDialog(Login.this);
-            pDialog.setTitle("Contacting Servers");
-            pDialog.setMessage("Logging in ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... args) {
-
-            UserFunctions userFunction = new UserFunctions();
-            JSONObject json = userFunction.loginUser(email, password);
-            return json;
-        }
-
-        
-        public void savePreferences(String key, String value)
-        {
-            SharedPreferences prefs = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), 0);
-            prefs.edit().putString(key, value).commit();
-        }
-
-
-        
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            try {
-               if (json.getString(KEY_SUCCESS) != null) {
-
-                    String res = json.getString(KEY_SUCCESS);
-
-                    if(Integer.parseInt(res) == 1){
-                        pDialog.setMessage("Loading User Space");
-                        pDialog.setTitle("Getting Data");
-                        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-                        JSONObject json_user = json.getJSONObject("user");
-                        /**
-                         * Clear all previous data in SQlite database.
-                         **/
-                        UserFunctions logout = new UserFunctions();
-                        logout.logoutUser(getApplicationContext());
-                        db.addUser(json_user.getString(KEY_FIRSTNAME),json_user.getString(KEY_LASTNAME),json_user.getString(KEY_EMAIL),json_user.getString(KEY_USERNAME),json_user.getString(KEY_UID),json_user.getString(KEY_CREATED_AT));
-                        savePreferences("USER_ID", json_user.getString(KEY_UID));
-                        
-                        // Now load the points table
-                      //  UserFunctions userFunction = new UserFunctions();
-                        //JSONObject json_points = userFunction.userPoints(json_user.getString(KEY_UID));
-//                       JSONObject json_points = json.getJSONObject("points");
-                        JSONArray points = json_user.getJSONArray("points");
-                       for(int i=0;i<points.length();i++){
-                    	   JSONObject obj = (JSONObject)points.get(i);
-                    	   db.setPoints(obj.getString(KEY_UID),obj.getString(BUSINESS_NAME),obj.getString(POINTS),obj.getString(UPDATED_AT));
-                       }
-                        /**
-                        *If JSON array details are stored in SQlite it launches the User Panel.
-                        **/
-                        Intent upanel = new Intent(getApplicationContext(), Main.class);
-                        upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        pDialog.dismiss();
-                        startActivity(upanel);
-                        /**
-                         * Close Login Screen
-                         **/
-                        finish();
-                    }else{
-
-                        pDialog.dismiss();
-                        loginErrorMsg.setText("Incorrect username/password");
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-       }
-    }
-    public void NetAsync(View view){
-        new NetCheck().execute();
-    }
 }
