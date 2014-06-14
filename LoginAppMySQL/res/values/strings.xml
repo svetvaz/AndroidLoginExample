@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LoyaltyPoints</string>
+    <string name="app_name">Potful Loyalty Reward Program</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="About">About</string>
     <string name="Help">Help</string>
-    <string-array name="types">
-     <item>Type 1</item>
-     <item>Type 2</item>
-     <item>Type 3</item>
-    </string-array>
-    <string-array name="types_values">
-     <item>1</item>
-     <item>2</item>
-     <item>3</item>
-    </string-array>
+   <string name="Logout">Logout</string>
+<string name="ChangePassword">Change Password</string>
+<string name="RateUs">Rate Us</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">UserSettingsActivity</string>
+<string name="msg_about_feedback">Send Feedback</string>
+      <string name="msg_about_privacy">Privacy</string>
+    <string name="msg_about_terms">Terms</string>
+    <string name="displaySettings">Display Settings</string>
+<string name="msg_about_description">NPR is an award-winning, multimedia news organization and an influential force in American life. In collaboration with more than 880 independent public radio stations nationwide, NPR strives to create a more informed public: one challenged and invigorated by a deeper understanding and appreciation of events, ideas and cultures. NPR produces and/or distributes radio programs that are heard by 27.5 million people each week. With more than 90 podcasts, NPR is the most successful podcaster among American media companies. Its 24/7 NPR Worldwide program stream reaches listeners in more than 100 countries. NPR Music, in partnership with leading music stations, is a free music discovery web site that offers live performances, studio sessions, first listens to new albums, blogs and features spanning all music genres. Since its launch in 1970, NPR has become a leader in representation and technology development in the public media community, assuring that the unique mission of nonprofit public media is preserved and grows.</string>
 
 </resources>

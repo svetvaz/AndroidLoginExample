@@ -171,7 +171,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
     
-    
+    public void resetPoints() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_POINTS, null, null);
+        db.close();
+    }
 
 
 

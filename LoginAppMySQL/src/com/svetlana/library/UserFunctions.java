@@ -22,6 +22,7 @@ public class UserFunctions {
     private static String chgpassURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String pointsURL = "http://goanhome.no-ip.info/svet_login_api/";
     private static String updatepoints_URL= "http://goanhome.no-ip.info/svet_login_api/";
+    private static String sync_db_URL= "http://goanhome.no-ip.info/svet_login_api/";
 
     private static String login_tag = "login";
     private static String register_tag = "register";
@@ -29,7 +30,7 @@ public class UserFunctions {
     private static String chgpass_tag = "chgpass";
     private static String updatepoints_tag = "updatepoints";
     private static String points_tag = "points";
-
+    private static String sync_db_tag= "sync_db";
 
     // constructor
     public UserFunctions(){
@@ -47,6 +48,16 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
         JSONObject json = jsonParser.getJSONFromUrl(loginURL, params);
+        return json;
+    }
+    
+    
+    public JSONObject syncdb(String uid){
+        // Building Parameters
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", sync_db_tag));
+        params.add(new BasicNameValuePair("uid", uid));
+        JSONObject json = jsonParser.getJSONFromUrl(sync_db_URL, params);
         return json;
     }
 

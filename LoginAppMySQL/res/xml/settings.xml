@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/displaySettings" >
+       <EditTextPreference
+            android:key="display_user"
+            android:title="Display User Name" 
+            android:summary="User name that will be displayed on every screen"
+            android:dialogTitle="Display user name"
+            android:dialogMessage="Choose a user name"    
+            android:defaultValue="Loyalty Rewards User" />
+
+        <EditTextPreference
+            android:key="welcome_message"
+            android:title="Welcome Message" 
+            android:summary="Define the Welcome message to be shown"
+            android:dialogTitle="Welcome Message"
+            android:dialogMessage="Provide a message"    
+            android:defaultValue="Welcome to Loyalty Reward Points" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

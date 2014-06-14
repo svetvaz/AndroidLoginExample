@@ -3,57 +3,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/btviewrewards"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView"
-        android:text="View Rewards"
-        android:textColor="#FFFFFF"
-        android:textSize="13dp" />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/welcomeText" android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+           
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/btviewrewards"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="14dp"
+            android:layout_centerHorizontal="true"
+ 			android:layout_below="@+id/welcomeText"
+            android:text="View Rewards"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
 
         <Button
             android:id="@+id/generateqrcode"
             android:layout_width="300dp"
             android:layout_height="40dp"
+            android:layout_alignLeft="@+id/btviewrewards"
             android:layout_below="@+id/btviewrewards"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
             android:text="Generate QR Code"
             android:textColor="#FFFFFF"
             android:textSize="13dp" />
 
-        <Button
+<!--         <Button
             android:id="@+id/btchangepass"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/generateqrcode"
             android:layout_below="@+id/generateqrcode"
             android:text="Change Password"
             android:textColor="#FFFFFF"
-            android:textSize="13dp" />
-        
-        
-           <Button
+            android:textSize="13dp" /> -->
+
+        <Button
             android:id="@+id/btupdatepoints"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/btchangepass"
+            android:layout_alignLeft="@+id/generateqrcode"
+            android:layout_below="@+id/generateqrcode"
             android:text="Update Points"
             android:textColor="#FFFFFF"
             android:textSize="13dp" />
-
+<!-- 
         <Button
             android:id="@+id/logout"
             android:layout_width="300dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/btupdatepoints"
             android:layout_below="@+id/btupdatepoints"
+            android:layout_marginTop="16dp"
             android:text="Logout"
             android:textColor="#FFFFFF"
-            android:textSize="13dp" />
+            android:textSize="13dp" /> -->
 
 </RelativeLayout>

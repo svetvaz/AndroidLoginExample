@@ -32,7 +32,7 @@
             android:textColor="#FFFFFF"
             android:layout_alignTop="@+id/textView3"
             android:layout_toRightOf="@+id/textView3"
-            android:password="true"/>
+            />
 
     <Button
             android:layout_width="160dp"
@@ -47,8 +47,8 @@
     <Button
             android:layout_width="170dp"
             android:layout_height="40dp"
-            android:text="Cancel"
-            android:id="@+id/btcancel"
+            android:text="Back to Main Menu"
+            android:id="@+id/btbktomenu"
             android:textColor="#FFFFFF"
             android:layout_alignTop="@+id/btupdatepoints"
             android:layout_alignParentRight="true"
