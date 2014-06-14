@@ -66,6 +66,13 @@ echo json_encode($response);
              echo json_encode($response);
 
 }
+}else if($tag=="sync_db"){
+	$uid = $_POST['uid'];
+	$points = $db->getPointsByUid($uid);
+        $response["success"] = 1;
+	$response["points"] = $points;
+        echo json_encode($response);
+
 }
   else if ($tag == 'chgpass'){
   $email = $_POST['email'];
@@ -77,8 +84,8 @@ echo json_encode($response);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"];
   $subject = "Change Password Notification";
-         $message = "Hello User,\n\nYour Password is sucessfully changed.\n\nRegards,\nLearn2Crack Team.";
-          $from = "contact@learn2crack.com";
+         $message = "Hello Loyalty Rewards Customer,\n\nYour Password has been sucessfully changed.\n\nRegards,\nLoyalty Rewards Team.";
+          $from = "svetvaz@gmail.com";
           $headers = "From:" . $from;
 	if ($db->isUserExisted($email)) {
 
@@ -101,7 +108,7 @@ echo json_encode($response);
            else {
 
             $response["error"] = 2;
-            $response["error_msg"] = "User not exist";
+            $response["error_msg"] = "User does not exist";
              echo json_encode($response);
 
 }
@@ -116,7 +123,7 @@ $hash = $db->hashSSHA($randomcode);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"];
   $subject = "Password Recovery";
-         $message = "Hello User,\n\nYour Password is sucessfully changed. Your new Password is $randomcode . Login with your new Password and change it in the User Panel.\n\nRegards,\nLearn2Crack Team.";
+         $message = "Hello Loyalty Rewards Customer,\n\nYour Password has been sucessfully changed. Your new Password is $randomcode . You are advised to login with your new Password and change it in the Main Menu.\n\nRegards,\nLoyalty Rewards Team.";
           $from = "svetvaz@gmail.com";
           $headers = "From:" . $from;
 	if ($db->isUserExisted($forgotpassword)) {
@@ -140,7 +147,7 @@ echo json_encode($response);
            else {
 
             $response["error"] = 2;
-            $response["error_msg"] = "User not exist";
+            $response["error_msg"] = "User does not exist";
              echo json_encode($response);
 
 }
@@ -157,7 +164,7 @@ else if ($tag == 'register') {
 
         
           $subject = "Registration";
-         $message = "Hello $fname,\n\nYou have sucessfully registered to our service.\n\nRegards,\nAdmin.";
+         $message = "Hello $fname,\n\nYou have sucessfully registered to the Loyalty Rewards program. You may begin using all of our services. \n\nRegards,\nAdmin, Loyalty Rewards Team.";
           $from = "svetvaz@gmail.com";
           $headers = "From:" . $from;
 
@@ -165,7 +172,7 @@ else if ($tag == 'register') {
         if ($db->isUserExisted($email)) {
             // user is already existed - error response
             $response["error"] = 2;
-            $response["error_msg"] = "User already existed";
+            $response["error_msg"] = "User already exists.Click on 'Forgot Password to retrieve your password'";
             echo json_encode($response);
         } 
            else if(!$db->validEmail($email)){
@@ -191,7 +198,7 @@ else {
             } else {
                 // user failed to store
                 $response["error"] = 1;
-                $response["error_msg"] = "JSON Error occured in Registartion";
+                $response["error_msg"] = "JSON Error occured in Registration";
                 echo json_encode($response);
             }
         }
@@ -201,7 +208,7 @@ else {
         echo json_encode($response);
     }
 } else {
-    echo "Learn2Crack Login API";
+    echo "Loyalty Rewards API";
 }
 ?>
 

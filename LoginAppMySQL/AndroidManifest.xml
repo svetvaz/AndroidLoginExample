@@ -66,6 +66,11 @@
                   android:label="Rewards">
 
         </activity>
+        
+                <activity android:name="com.svetlana.loyaltyrewards.About"
+                  android:label="About">
+
+        </activity>
                 
         <activity android:name="com.svetlana.loyaltyrewards.UserSettings"
                   android:label="Settings">

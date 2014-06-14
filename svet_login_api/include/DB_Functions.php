@@ -57,7 +57,11 @@ return false;
 
 public function updatepoints($userid, $businessname, $newpoints){
 
-  $result = mysql_query("UPDATE `points` SET `pointvalues` = '$newpoints' WHERE `uid` = '$userid'");
+  $result = mysql_query("SELECT pointvalues from `points` WHERE uid = '$userid'");
+  $oldpoints =  mysql_fetch_array($result);
+  $computedpoints = $oldpoints["pointvalues"]+$newpoints;
+ // $computedpoints = $newpoints;
+  $result = mysql_query("UPDATE `points` SET `pointvalues` = '$computedpoints' WHERE `uid` = '$userid'");
 
 if ($result) {
  

@@ -12,19 +12,19 @@
       android:layout_height="wrap_content"
       android:layout_width="fill_parent"
       android:orientation="vertical"
-      android:padding="10dip" android:paddingRight="20dip">
+     >
       <ImageView
         android:id="@+id/ImageView01"
         android:layout_height="wrap_content"
         android:scaleType="fitCenter"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="-10dip"></ImageView>
+        ></ImageView>
       <include layout="@layout/divider" />
       <TextView
         android:id="@+id/AboutText"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall" android:layout_marginTop="10dip">
+        android:textAppearance="?android:attr/textAppearanceSmall" >
       </TextView>
       <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/FeedbackButton" android:text="@string/msg_about_feedback"></Button><include layout="@layout/divider" />
       <TextView
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="@string/msg_about_description"
         android:layout_width="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall" android:layout_marginTop="10dip"></TextView>
+        android:textAppearance="?android:attr/textAppearanceSmall" ></TextView>
     <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/PrivacyButton" android:text="@string/msg_about_privacy"></Button>
 <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TermsButton" android:text="@string/msg_about_terms"></Button>
 
