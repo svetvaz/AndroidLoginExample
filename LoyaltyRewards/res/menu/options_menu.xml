@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+      <item android:id="@+id/about"
+              android:title="@string/About" />
+      <item android:id="@+id/settings"
+            android:title="@string/menu_settings" />
+        <item android:id="@+id/rateus"
+            android:title="@string/RateUs" />
+        <item android:id="@+id/chngPswd"
+            android:title="@string/ChangePassword" />
+          <item android:id="@+id/logout"
+            android:title="@string/Logout" />
+
+</menu>

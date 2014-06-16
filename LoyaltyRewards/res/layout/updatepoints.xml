@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+            android:layout_width="190dp"
+            android:layout_height="40dp"
+            android:text="Update Points"
+            android:id="@+id/textView"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView"
+        android:text="New Points"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:id="@+id/newpoints"
+            android:hint="New Points"
+            android:textColor="#FFFFFF"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_toRightOf="@+id/textView3"
+            />
+
+    <Button
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:text="Update Points"
+            android:id="@+id/btupdatepoints"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:textSize="13dp"/>
+
+    <Button
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:text="Back to Main Menu"
+            android:id="@+id/btbktomenu"
+            android:textColor="#FFFFFF"
+            android:layout_alignTop="@+id/btupdatepoints"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@+id/btupdatepoints"
+            android:textSize="13dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:id="@+id/alertpass"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/btupdatepoints"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"/>
+</RelativeLayout>

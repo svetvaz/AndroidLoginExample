@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+             >
+
+    
+    
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:hint="E-mail"
+            android:id="@+id/email"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentRight="true"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"/>
+
+    <Button
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:text="Login"
+            android:id="@+id/login"
+            android:textSize="13dp"
+            android:textColor="#FFFFFF"
+            android:layout_alignTop="@+id/registerbtn"
+            android:layout_alignParentRight="true"/>
+    <Button
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:text="Register"
+            android:id="@+id/registerbtn"
+            android:layout_below="@+id/pword"
+            android:layout_marginTop="10dp"
+            android:textSize="13dp"
+            android:textColor="#FFFFFF"
+            android:layout_toLeftOf="@+id/login"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:id="@+id/loginErrorMsg"
+            android:textColor="#FFFFFF"
+            android:layout_below="@+id/passres"
+            android:layout_alignParentLeft="true"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Email"
+            android:id="@+id/textView2"
+            android:layout_alignTop="@+id/email"
+            android:layout_toLeftOf="@+id/textView"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"/>
+
+    <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/pword"
+            android:hint="Password"
+            android:layout_below="@+id/email"
+            android:layout_alignLeft="@+id/email"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"/>
+
+    <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Password"
+            android:id="@+id/pworda"
+            android:layout_alignBottom="@+id/pword"
+            android:layout_alignRight="@+id/textView2"
+            android:textSize="15dp"
+            android:textColor="#FFFFFF"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Forgot Password"
+            android:id="@+id/passres"
+            android:layout_below="@+id/login"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="13dp"
+            android:textColor="#FFFFFF"/>
+    
+</RelativeLayout>
+

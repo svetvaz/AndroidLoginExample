@@ -57,15 +57,16 @@ return false;
 
 public function updatepoints($userid, $businessname, $newpoints){
 
-  $result = mysql_query("SELECT pointvalues from `points` WHERE uid = '$userid'");
-  $oldpoints =  mysql_fetch_array($result);
+  $result1 = mysql_query("SELECT pointvalues from `points` WHERE uid = '$userid' AND businessname='$businessname'");
+  $oldpoints =  mysql_fetch_array($result1);
   $computedpoints = $oldpoints["pointvalues"]+$newpoints;
  // $computedpoints = $newpoints;
-  $result = mysql_query("UPDATE `points` SET `pointvalues` = '$computedpoints' WHERE `uid` = '$userid'");
-
-if ($result) {
- 
-return true;
+  $result = mysql_query("UPDATE `points` SET `pointvalues` = '$computedpoints' WHERE `uid` = '$userid' AND `businessname`='$businessname'");
+  $result_user = mysql_query("SELECT * from users WHERE unique_id = '$userid'");
+  $no_of_rows = mysql_num_rows($result_user);
+if ($no_of_rows > 0) {
+ $result = mysql_fetch_array($result_user);
+ return $result_user;
 
 }
 else
@@ -214,6 +215,22 @@ public function validEmail($email)
      */
     public function isUserExisted($email) {
         $result = mysql_query("SELECT email from users WHERE email = '$email'");
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            // user existed 
+            return true;
+        } else {
+            // user not existed
+            return false;
+        }
+    }
+
+
+ /**
+     * Get user by unique id
+     */
+    public function getUserByUniqueId($unique_id) {
+        $result = mysql_query("SELECT unique_id from users WHERE unique_id = '$unique_id'");
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
             // user existed 

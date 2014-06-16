@@ -46,16 +46,17 @@ else if($tag=='updatepoints'){
 $uid = $_POST['uid'];
 $newpoints = $_POST['newpoints'];
 $businessname = $_POST['businessname'];
-$email= $_POST['email'];
-if ($db->isUserExisted($email)) {
+if ($db->getUserByUniqueId($uid)) {
 
 $result = $db->updatepoints($uid, $businessname, $newpoints);
 if ($result) {
-         $response["success"] = 1;
-          echo json_encode($response);
+            $response["success"] = 1;
+            $response["result"] =$result;
+            echo json_encode($response);
 }
 else {
 $response["error"] = 1;
+$response["error_msg"] = "Error retrieving user details";
 echo json_encode($response);
 }          
         } 
@@ -189,7 +190,7 @@ else {
             $response["user"]["fname"] = $user["firstname"];
             $response["user"]["lname"] = $user["lastname"];
             $response["user"]["email"] = $user["email"];
-	    $response["user"]["uname"] = $user["username"];
+	          $response["user"]["uname"] = $user["username"];
             $response["user"]["uid"] = $user["unique_id"];
             $response["user"]["created_at"] = $user["created_at"];
   //             mail($email,$subject,$message,$headers);
