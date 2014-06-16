@@ -58,10 +58,17 @@ return false;
 public function updatepoints($userid, $businessname, $newpoints){
 
   $result1 = mysql_query("SELECT pointvalues from `points` WHERE uid = '$userid' AND businessname='$businessname'");
+  $no_of_rows = mysql_num_rows($result1);
+  if ($no_of_rows > 0) {
   $oldpoints =  mysql_fetch_array($result1);
   $computedpoints = $oldpoints["pointvalues"]+$newpoints;
- // $computedpoints = $newpoints;
   $result = mysql_query("UPDATE `points` SET `pointvalues` = '$computedpoints' WHERE `uid` = '$userid' AND `businessname`='$businessname'");
+  }
+  else{
+    //insert points into the points table
+    $result = mysql_query("INSERT INTO points(uid,businessname,pointvalues) VALUES ('$userid','$businessname','$newpoints')");
+  }
+  
   $result_user = mysql_query("SELECT * from users WHERE unique_id = '$userid'");
   $no_of_rows = mysql_num_rows($result_user);
 if ($no_of_rows > 0) {
@@ -126,18 +133,16 @@ public function getPointsByUid($uid) {
 	 $result = mysql_query("SELECT * FROM points WHERE uid = '$uid'") or die(mysql_error());
         // check for result 
         $no_of_rows = mysql_num_rows($result);
+          $rows = Array();
         if ($no_of_rows > 0) {
-		$rows = Array();
+	
 		while($row = mysql_fetch_array($result)){
   			array_push($rows, $row);
 			}
            
-	    return $rows;
-        } else {
-            // no points found
-            return false;
+	    
         }
-
+        return $rows;
 }
 
 

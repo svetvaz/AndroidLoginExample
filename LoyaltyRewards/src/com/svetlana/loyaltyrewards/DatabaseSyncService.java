@@ -122,7 +122,7 @@ public class DatabaseSyncService extends Service {
                     savePreferences("USER_ID", json_user.getString(KEY_UID));
                     
                     // Now load the points table
-
+                     
                     JSONArray points = json_user.getJSONArray("points");
                     
                    

@@ -19,38 +19,18 @@ public class Home extends Activity{
 	 
 	ImageView myImage;
     int counter=0;
-	 
-   
+    int[] arrImageResources = {R.drawable.shop,R.drawable.potful,R.drawable.shop2};
 	
  @Override
  public void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.home);
-//  if(timer != null){
-//	     timer.cancel();
-//	    }
-//  
-//  timer = new Timer();
-//  class RemindTask extends TimerTask {
-//	   
-//      int[] arrImageResources = {R.drawable.shop,R.drawable.coins,R.drawable.shop};
-//
-//      public void run() {
-//       	  myImage.setImageResource(arrImageResources[counter]);
-//             if(counter==2){
-//           	  counter=0;
-//             }else{
-//             counter++;
-//             }
-//              
-//          
-//       }
-//   }
-//  timer.schedule(new RemindTask(),0,3*1000);
+  
+  startImageUpdateTask();
   myImage = (ImageView) findViewById(R.id.imageViewMain);
     
-    myImage.setImageResource(R.drawable.shop);
-    welcomeText = (TextView) findViewById(R.id.welcomeText);
+  myImage.setImageResource(R.drawable.shop);
+  welcomeText = (TextView) findViewById(R.id.welcomeText);
   //retrieve welcome msg from shared preferences
   SharedPreferences sharedPrefs = PreferenceManager
           .getDefaultSharedPreferences(this);
@@ -62,14 +42,14 @@ public class Home extends Activity{
  @Override
 	protected void onResume() {
 		super.onResume();
-		
+		startImageUpdateTask();
 	}
 	
 	@Override
 	protected void onPause() {
-		  if(timer != null){
-			     timer.cancel();
-			    }
+		if(timer != null){
+			timer.cancel();
+		}
 		super.onPause();
 	}
 	
@@ -82,4 +62,25 @@ public class Home extends Activity{
 	
 	}
  
+	private void startImageUpdateTask() {
+		if(timer != null){
+		     timer.cancel();
+		     timer = null;
+	    }
+		if(timer==null) {
+		  timer = new Timer();
+		  timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				++counter; counter%=3;
+			    runOnUiThread(new Runnable() {
+		                @Override
+		                public void run() {
+		                	myImage.setImageResource(arrImageResources[counter]);
+		                }
+		            });
+		     }	  
+		  }, 3*1000, 3*1000);
+		}
+	}
 }

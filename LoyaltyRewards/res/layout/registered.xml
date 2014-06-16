@@ -9,10 +9,10 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Congratulations. You have Sucessfully Registered..."
+            android:text="Congratulations and Welcome to the PiggyRewards Loyalty Program!"
             android:textColor="#FFFFFF"
             android:id="@+id/textView" android:layout_gravity="center"
-            android:textSize="15dp"
+            android:textSize="10dp"
             android:textAlignment="center"/>
 
     <TextView
@@ -25,14 +25,14 @@
             android:layout_centerHorizontal="true"/>
 
     <TextView
-            android:layout_width="125dp"
-            android:textColor="#FFFFFF"
-            android:layout_height="40dp"
-            android:text="First Name"
-            android:id="@+id/textView3"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentLeft="true"
-            android:textSize="15dp"/>
+        android:id="@+id/textView3"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:text="First Name"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
 
     <TextView
             android:layout_width="200dp"
@@ -44,23 +44,22 @@
             android:textSize="15dp"/>
 
     <TextView
-            android:layout_width="125dp"
-            android:layout_height="40dp"
-            android:text="Last Name"
-            android:textColor="#FFFFFF"
-            android:id="@+id/textView5"
-            android:layout_below="@+id/textView3"
-            android:textSize="15dp"
-            android:layout_toLeftOf="@+id/fname"/>
+        android:id="@+id/textView5"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView3"
+        android:text="Last Name"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
 
     <TextView
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:id="@+id/lname"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/textView3"
-            android:layout_toRightOf="@+id/textView5"
-            android:textSize="15dp"/>
+        android:id="@+id/lname"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView3"
+        android:textColor="#FFFFFF"
+        android:layout_alignLeft="@+id/fname"
+        android:textSize="15dp" />
 
     <TextView
             android:layout_width="125dp"
@@ -101,23 +100,23 @@
             android:textSize="15dp"/>
 
     <TextView
-            android:layout_width="125dp"
-            android:layout_height="40dp"
-            android:text="Registered at"
-            android:id="@+id/textView11"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/textView9"
-            android:layout_toLeftOf="@+id/uname"
-            android:textSize="15dp"/>
+        android:id="@+id/textView11"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_below="@+id/textView9"
+        android:text="At"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
 
     <TextView
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:id="@+id/regat"
-            android:textColor="#FFFFFF"
-            android:layout_below="@+id/textView9"
-            android:layout_alignRight="@+id/lname"
-            android:textSize="15dp"/>
+        android:id="@+id/regat"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/fname"
+        android:layout_below="@+id/textView9"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
 
     <Button
             android:layout_width="200dp"

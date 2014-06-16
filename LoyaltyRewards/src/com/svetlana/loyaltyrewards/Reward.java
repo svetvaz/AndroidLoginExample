@@ -221,14 +221,13 @@ public class Reward extends Activity {
 	                      	   JSONObject obj = (JSONObject)points.get(i);
 	                      	   db.setPoints(obj.getString(KEY_UID),obj.getString(BUSINESS_NAME),obj.getString(POINTS),obj.getString(UPDATED_AT));
 	                         }
-	                         Toast.makeText(getApplicationContext(), "Sync DB complete", Toast.LENGTH_SHORT).show();
 	                         BuildTable();
 	                        pDialog.dismiss();
 	               
 
 
 	                    } else {
-	                    	Toast.makeText(getApplicationContext(), "Problem while syncing. Go back to menu and re open your rewards page!", Toast.LENGTH_LONG).show();
+	                    	Toast.makeText(getApplicationContext(), "A problem occurred while syncing. Click on a different tab and re open your rewards tab!", Toast.LENGTH_LONG).show();
 	                        pDialog.dismiss();
 	                      
 	                    }

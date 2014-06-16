@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Potful Loyalty Reward Program</string>
+    <string name="app_name">PiggyRewards Loyalty Program</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="About">About</string>
