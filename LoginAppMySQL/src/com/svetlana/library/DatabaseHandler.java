@@ -35,19 +35,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	public static final String TABLE_POINTS = "points";
 	public static final String POINTS_ID = "pid";
 	public static final String POINTS = "pointvalues";
-	 private static final String UPDATED_AT = "updated_at";
-		// TABLE CREATION STATEMENT
+	private static final String UPDATED_AT = "updated_at";
+	public static final String TABLE_RATING = "rating";
+	public static final String RATING = "rating";
+	public static final String FEEDBACK = "feedback";
+	public static final String RATING_ID= "rid";
 
-//		private static final String CREATE_BUSINESS_TABLE = "create table " + TABLE_BUSINESS
-//				+ "(" + BUSINESS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-//				+ BUSINESS_NAME + " TEXT NOT NULL, " + "UNIQUE(" + BUSINESS_NAME + ")););";
 		
 		private static final String CREATE_POINTS_TABLE = "create table " + TABLE_POINTS
 				+ "(" + POINTS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ BUSINESS_NAME + " TEXT NOT NULL, "+ KEY_UID + " TEXT NOT NULL, "+ POINTS + " TEXT NOT NULL, "
 		                + UPDATED_AT + " TEXT" + ")";
 
-
+		private static final String CREATE_RATING_TABLE = "create table " + TABLE_RATING
+				+ "(" + RATING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+				+ KEY_UID + " TEXT NOT NULL, "+ RATING + " TEXT NOT NULL, "
+		                + FEEDBACK + " TEXT" + ")";
 	
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -65,19 +68,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_UID + " TEXT,"
                 + KEY_CREATED_AT + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
-//        db.execSQL(CREATE_BUSINESS_TABLE);
         db.execSQL(CREATE_POINTS_TABLE);
+        db.execSQL(CREATE_RATING_TABLE);
 
     }
 
-    // Upgrading database
+ 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSINESS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POINTS);
-        // Create tables again
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RATING);
         onCreate(db);
     }
 
@@ -92,13 +93,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_LASTNAME, lname); // LastName
         values.put(KEY_EMAIL, email); // Email
         values.put(KEY_USERNAME, uname); // UserName
-        values.put(KEY_UID, uid); // Email
-        values.put(KEY_CREATED_AT, created_at); // Created At
+        values.put(KEY_UID, uid); //unique id
+        values.put(KEY_CREATED_AT, created_at); 
 
-        // Inserting Row
         db.insert(TABLE_LOGIN, null, values);
-//        db.execSQL(CREATE_BUSINESS_TABLE);
-        db.close(); // Closing database connection
+        db.close(); 
     }
 
 
@@ -111,7 +110,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // Move to first row
         cursor.moveToFirst();
         if(cursor.getCount() > 0){
             user.put("fname", cursor.getString(1));
@@ -123,7 +121,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
-        // return user
         return user;
     }
     
@@ -135,10 +132,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(BUSINESS_NAME, businessname); 
         values.put(POINTS, points); 
         values.put(UPDATED_AT, updated_at); 
-        // Inserting Row
         db.insert(TABLE_POINTS, null, values);
-        db.close(); // Closing database connection
+        db.close();
     }   
+    
+    public void setRating(String uid, String rating, String feedback) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_UID, uid); 
+        values.put(RATING, rating); 
+        values.put(FEEDBACK, feedback); 
+        db.insert(TABLE_RATING, null, values);
+        db.close();
+    }  
+
+    
+    
+    public HashMap<String, String> getRating(String uid){
+        HashMap<String,String> ratingDetails = new HashMap<String,String>();
+        String selectQuery = "SELECT  * FROM " + TABLE_RATING + " WHERE uid= ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] selArgs = {uid};
+        Cursor cursor = db.rawQuery(selectQuery, selArgs);
+        cursor.moveToFirst();
+        if(cursor.getCount() > 0){
+        	ratingDetails.put("uid", cursor.getString(1));
+        	ratingDetails.put("rating", cursor.getString(2));
+        	ratingDetails.put("feedback", cursor.getString(3));
+        }
+        cursor.close();
+        db.close();
+        return ratingDetails;
+    }
 
 
     /**
@@ -164,16 +189,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * */
     public void resetTables() {
         SQLiteDatabase db = this.getWritableDatabase();
-        // Delete All Rows from all tables
         db.delete(TABLE_LOGIN, null, null);
-//        db.delete(TABLE_BUSINESS, null, null);
         db.delete(TABLE_POINTS, null, null);
+        db.delete(TABLE_RATING, null, null);
         db.close();
     }
     
     public void resetPoints() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_POINTS, null, null);
+        db.close();
+    }
+    
+    public void resetRating() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_RATING, null, null);
         db.close();
     }
 

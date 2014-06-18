@@ -2,6 +2,10 @@ package com.svetlana.loyaltyrewards;
 
 
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -10,14 +14,18 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,20 +53,34 @@ public class Reward extends Activity {
     private static String BUSINESS_NAME = "businessname";
     private static String POINTS = "pointvalues";
     private static String UPDATED_AT = "updated_at";
-
+    TextView rewardErrorMsg;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rewardlist);
 
 		sqlcon = new SQLController(this);
-
+		rewardErrorMsg = (TextView) findViewById(R.id.rewardErrorMsg);
 		table_layout = (TableLayout) findViewById(R.id.tableLayout1);
 		NetAsync();
 		
 		
 
 	}
+	
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+        	Intent myIntent = new Intent(getApplicationContext(), Main.class);
+             startActivityForResult(myIntent, 0);
+             finish();
+            return true;
+        }
+        return false;
+    }
 
 	private void BuildTable() {
 		sqlcon.open();
@@ -68,7 +90,10 @@ public class Reward extends Activity {
 		int cols = c.getColumnCount();
 
 		c.moveToFirst();
-
+        if(rows==0){
+        	 rewardErrorMsg.setText("You have not used PiggyRewards yet!");
+        	 return;
+        }
 		// outer for loop
 		for (int i = 0; i < rows; i++) {
 
@@ -97,7 +122,7 @@ public class Reward extends Activity {
 			table_layout.addView(row);
 
 		}
-		
+		rewardErrorMsg.setText("");
 		registerForContextMenu(table_layout);
 		sqlcon.close();
 	}
@@ -139,8 +164,8 @@ public class Reward extends Activity {
 	        protected void onPreExecute(){
 	            super.onPreExecute();
 	            nDialog = new ProgressDialog(Reward.this);
-	            nDialog.setMessage("Syncing..");
-	            nDialog.setTitle("Loyalty Points");
+	            nDialog.setMessage("Checking Network..");
+	            nDialog.setTitle("Piggy Rewards Loyalty Program");
 	            nDialog.setIndeterminate(false);
 	            nDialog.setCancelable(true);
 	            nDialog.show();
@@ -149,8 +174,30 @@ public class Reward extends Activity {
 	        @Override
 	        protected Boolean doInBackground(String... args){
 
-	            return true;
-	        }
+
+/**
+ * Gets current device state and checks for working internet connection by trying Google.
+ **/
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+
+        }
 	        @Override
 	        protected void onPostExecute(Boolean th){
 
@@ -160,7 +207,7 @@ public class Reward extends Activity {
 	            }
 	            else{
 	                nDialog.dismiss();
-	               
+	                rewardErrorMsg.setText("Error in Network Connection");
 	            }
 	        }
 	    }
@@ -213,10 +260,12 @@ public class Reward extends Activity {
 
 
 	                    if (Integer.parseInt(res) == 1) {
+	                    	 rewardErrorMsg.setText("");
 	                    	 JSONArray points = json.getJSONArray("points");
 	                    	 DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 	                         //first reset the points table
 	                    	 db.resetPoints();
+	                    	 
 	                         for(int i=0;i<points.length();i++){
 	                      	   JSONObject obj = (JSONObject)points.get(i);
 	                      	   db.setPoints(obj.getString(KEY_UID),obj.getString(BUSINESS_NAME),obj.getString(POINTS),obj.getString(UPDATED_AT));

@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -86,4 +87,18 @@ public class GenerateQRCode extends Activity{
                      return true;  
                         
    }  
+	
+	
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+        	Intent myIntent = new Intent(getApplicationContext(), Main.class);
+             startActivityForResult(myIntent, 0);
+             finish();
+            return true;
+        }
+        return false;
+    }
 }

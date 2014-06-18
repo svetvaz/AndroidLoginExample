@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +93,8 @@ public class Register extends Activity {
             }
 
         });
+        
+    
 
         /**
          * Register Button click event.
@@ -123,6 +126,18 @@ public class Register extends Activity {
             }
         });
        }
+    
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) 
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+        	Intent myIntent = new Intent(Register.this, Login.class);
+            startActivityForResult(myIntent, 0);
+            finish();
+        }
+        return false;
+    }
     /**
      * Async Task to check whether internet connection is working
      **/

@@ -1,49 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
     android:orientation="vertical" >
- 
+
     <TextView
         android:id="@+id/lblRateMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:text="Rate Me"
         android:textAppearance="?android:attr/textAppearanceMedium" />
- 
+
     <RatingBar
         android:id="@+id/ratingBar"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+ 		android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lblRateMe"
+        android:layout_marginTop="25dp"
         android:numStars="4"
-        android:stepSize="1.0"
-        android:rating="4.0" />
- 
+        android:rating="4.0"
+        android:stepSize="1.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+         android:layout_marginTop="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ratingBar"
+        android:text="Feedback"
+        android:textColor="#FFFFFF"
+        android:textSize="15dp" />
+
+    <EditText
+        android:id="@+id/feedback"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:textColor="#FFFFFF"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3" />
+
     <Button
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3"
         android:text="Submit" />
- 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
- 
-        <TextView
-            android:id="@+id/lblResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Result : "
-            android:textAppearance="?android:attr/textAppearanceLarge" />
- 
-        <TextView
-            android:id="@+id/txtRatingValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAppearance="?android:attr/textAppearanceSmall" />
- 
-    </LinearLayout>
- 
-</LinearLayout>
+
+    <Button
+        android:id="@+id/btnbktomenu"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/feedback"
+        android:text="Back Home" />
+
+</RelativeLayout>

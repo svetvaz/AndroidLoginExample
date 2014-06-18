@@ -2,6 +2,10 @@ package com.svetlana.loyaltyrewards;
 
 
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -10,8 +14,11 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Bundle;
@@ -130,14 +137,26 @@ public class DatabaseSyncService extends Service {
                 	   JSONObject obj = (JSONObject)points.get(i);
                 	   db.setPoints(obj.getString(KEY_UID),obj.getString(BUSINESS_NAME),obj.getString(POINTS),obj.getString(UPDATED_AT));
                    }
-   
                    
+                   //Also load the rating table
+                   JSONArray ratingDetails = json_user.getJSONArray("rating");
+                   if(ratingDetails.length()>0){
+                   JSONObject objRating = (JSONObject)ratingDetails.get(0);
+                   String rating = objRating.getString("rating");
+                   String feedback = objRating.getString("feedback");
+                   if(rating!=null){
+                	   db.setRating(json_user.getString(KEY_UID), rating, feedback);
+                   }
+                   }
                     return -1;
                 }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Toast.makeText(getApplicationContext(), "Login failed",
+			     Toast.LENGTH_SHORT).show();
+                   
         return 0;
    }
 
@@ -159,18 +178,41 @@ public void savePreferences(String key, String value)
 	
 	    @Override
 	    protected Boolean doInBackground(String... args){
-	       
-	       return true;
-	
-	    }
+
+
+/**
+ * Gets current device state and checks for working internet connection by trying Google.
+ **/
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            if (netInfo != null && netInfo.isConnected()) {
+                try {
+                    URL url = new URL("http://www.google.com");
+                    HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                    urlc.setConnectTimeout(3000);
+                    urlc.connect();
+                    if (urlc.getResponseCode() == 200) {
+                        return true;
+                    }
+                } catch (MalformedURLException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return false;
+
+        }
 	    @Override
 	    protected void onPostExecute(Boolean th){
 	
 	        if(th == true){
-//	            nDialog.dismiss();
 	            new ProcessLogin().execute();
 	        }
-	
+	        else{
+               
+	        	 Toast.makeText(getApplicationContext(), "Network not connected", Toast.LENGTH_SHORT).show();
+            }
 	    }
 	}
 	

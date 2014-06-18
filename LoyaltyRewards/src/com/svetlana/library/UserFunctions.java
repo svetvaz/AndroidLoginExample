@@ -15,15 +15,9 @@ public class UserFunctions {
     private JSONParser jsonParser;
 
     //URL of the PHP API
-   // private static String loginURL = "http://192.168.1.224/svet_login_api/";
-    private static String loginURL = "http://goanhome.no-ip.info/svet_login_api/";
-    private static String registerURL = "http://goanhome.no-ip.info/svet_login_api/";
-    private static String forpassURL = "http://goanhome.no-ip.info/svet_login_api/";
-    private static String chgpassURL = "http://goanhome.no-ip.info/svet_login_api/";
-    private static String pointsURL = "http://goanhome.no-ip.info/svet_login_api/";
-    private static String updatepoints_URL= "http://goanhome.no-ip.info/svet_login_api/";
-    private static String sync_db_URL= "http://goanhome.no-ip.info/svet_login_api/";
 
+    private static String api_URL = "http://goanhome.no-ip.info/svet_login_api/";
+    		
     private static String login_tag = "login";
     private static String register_tag = "register";
     private static String forpass_tag = "forpass";
@@ -31,6 +25,7 @@ public class UserFunctions {
     private static String updatepoints_tag = "updatepoints";
     private static String points_tag = "points";
     private static String sync_db_tag= "sync_db";
+    private static String updaterating_tag = "updaterating";
 
     // constructor
     public UserFunctions(){
@@ -47,7 +42,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("tag", login_tag));
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(loginURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
     
@@ -57,7 +52,7 @@ public class UserFunctions {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", sync_db_tag));
         params.add(new BasicNameValuePair("uid", uid));
-        JSONObject json = jsonParser.getJSONFromUrl(sync_db_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
 
@@ -70,7 +65,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("tag", chgpass_tag));
         params.add(new BasicNameValuePair("newpas", newpas));
         params.add(new BasicNameValuePair("email", email));
-        JSONObject json = jsonParser.getJSONFromUrl(chgpassURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
 
@@ -86,7 +81,22 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("uid", uid));
         params.add(new BasicNameValuePair("businessname", businessname));
         params.add(new BasicNameValuePair("email", email));
-        JSONObject json = jsonParser.getJSONFromUrl(updatepoints_URL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
+        return json;
+    }
+    
+
+    /**
+     * Function to update rating
+     **/
+
+    public JSONObject updateRating(String rating, String uid, String feedback){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("tag", updaterating_tag));
+        params.add(new BasicNameValuePair("rating", rating));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("feedback", feedback));
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
 
@@ -99,7 +109,7 @@ public class UserFunctions {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", forpass_tag));
         params.add(new BasicNameValuePair("forgotpassword", forgotpassword));
-        JSONObject json = jsonParser.getJSONFromUrl(forpassURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
 
@@ -120,7 +130,7 @@ public class UserFunctions {
         params.add(new BasicNameValuePair("email", email));
         params.add(new BasicNameValuePair("uname", uname));
         params.add(new BasicNameValuePair("password", password));
-        JSONObject json = jsonParser.getJSONFromUrl(registerURL,params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL,params);
         return json;
     }
 
@@ -131,7 +141,7 @@ public class UserFunctions {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("tag", points_tag));
         params.add(new BasicNameValuePair("uid", uid));
-        JSONObject json = jsonParser.getJSONFromUrl(pointsURL, params);
+        JSONObject json = jsonParser.getJSONFromUrl(api_URL, params);
         return json;
     }
     

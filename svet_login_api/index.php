@@ -31,7 +31,9 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["user"]["uid"] = $user["unique_id"];
             $response["user"]["created_at"] = $user["created_at"];
             $points = $db->getPointsByUid($user["unique_id"]);
-	    $response["user"]["points"] = $points;	
+            $ratingDetails =  $db->getRatingByUid($user["unique_id"]);
+	    $response["user"]["points"] = $points;
+       $response["user"]["rating"] = $ratingDetails;  
             echo json_encode($response);
 	    
         } else {
@@ -67,6 +69,30 @@ echo json_encode($response);
              echo json_encode($response);
 
 }
+}else if($tag=='updaterating'){
+$uid = $_POST['uid'];
+$rating = $_POST['rating'];
+$feedback = $_POST['feedback'];
+if ($db->getUserByUniqueId($uid)) {
+
+$result = $db->updaterating($uid, $rating, $feedback);
+if ($result) {
+            $response["success"] = 1;
+            echo json_encode($response);
+}
+else {
+$response["error"] = 1;
+$response["error_msg"] = "Error updating rating details";
+echo json_encode($response);
+}          
+        } 
+           else {
+
+            $response["error"] = 2;
+            $response["error_msg"] = "User does not exist";
+             echo json_encode($response);
+
+}
 }else if($tag=="sync_db"){
 	$uid = $_POST['uid'];
 	$points = $db->getPointsByUid($uid);
@@ -85,9 +111,9 @@ echo json_encode($response);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"];
   $subject = "Change Password Notification";
-         $message = "Hello Loyalty Rewards Customer,\n\nYour Password has been sucessfully changed.\n\nRegards,\nLoyalty Rewards Team.";
+         $message = "Hello Piggy Rewards Customer,\n\nYour Password has been sucessfully changed.\n\nRegards,\Piggy Rewards Team.";
           $from = "svetvaz@gmail.com";
-          $headers = "From:" . $from;
+          $headers = "From: svetvaz@gmail.com";
 	if ($db->isUserExisted($email)) {
 
  $user = $db->forgotPassword($email, $encrypted_password, $salt);
@@ -124,7 +150,7 @@ $hash = $db->hashSSHA($randomcode);
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"];
   $subject = "Password Recovery";
-         $message = "Hello Loyalty Rewards Customer,\n\nYour Password has been sucessfully changed. Your new Password is $randomcode . You are advised to login with your new Password and change it in the Main Menu.\n\nRegards,\nLoyalty Rewards Team.";
+         $message = "Hello Piggy Rewards Customer,\n\nYour Password has been sucessfully changed. Your new Password is $randomcode . You are advised to login with your new Password and change it in the Main Menu.\n\nRegards,\Piggy Rewards Team.";
           $from = "svetvaz@gmail.com";
           $headers = "From:" . $from;
 	if ($db->isUserExisted($forgotpassword)) {
@@ -132,7 +158,7 @@ $hash = $db->hashSSHA($randomcode);
  $user = $db->forgotPassword($forgotpassword, $encrypted_password, $salt);
 if ($user) {
          $response["success"] = 1;
-//          mail($forgotpassword,$subject,$message,$headers);
+          mail($forgotpassword,$subject,$message,$headers);
          echo json_encode($response);
 }
 else {
@@ -165,7 +191,7 @@ else if ($tag == 'register') {
 
         
           $subject = "Registration";
-         $message = "Hello $fname,\n\nYou have sucessfully registered to the Loyalty Rewards program. You may begin using all of our services. \n\nRegards,\nAdmin, Loyalty Rewards Team.";
+         $message = "Hello $fname,\n\nYou have sucessfully registered to the Piggy Rewards Loyalty program. You may begin using all of our services. \n\nRegards,\nAdmin, Loyalty Rewards Team.";
           $from = "svetvaz@gmail.com";
           $headers = "From:" . $from;
 

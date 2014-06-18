@@ -49,13 +49,10 @@
 
         </activity>
         
-       <activity android:name="com.svetlana.loyaltyrewards.UpdatePoints"
-                  android:label="Rate Us">
 
-        </activity>
 
        <activity android:name="com.svetlana.loyaltyrewards.RateMe"
-                  android:label="Update Points">
+                  android:label="Rate Us">
 
         </activity>
                  <activity android:name="com.svetlana.loyaltyrewards.GenerateQRCode"

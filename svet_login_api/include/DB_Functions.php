@@ -83,6 +83,30 @@ return false;
 
 }
 
+public function updaterating($userid, $rating, $feedback){
+
+  $result1 = mysql_query("SELECT uid from `rating` WHERE uid = '$userid'");
+  $no_of_rows = mysql_num_rows($result1);
+  if ($no_of_rows > 0) {
+  $result = mysql_query("UPDATE `rating` SET `rating` = '$rating' AND `feedback` = '$feedback' WHERE `uid` = '$userid'");
+  }
+  else{
+    //insert points into the points table
+    $result = mysql_query("INSERT INTO rating(uid,rating,feedback) VALUES ('$userid','$rating','$feedback')");
+  }
+
+if ($result) {
+ return true;
+
+}
+else
+{
+return false;
+}
+
+}
+
+
 /**
      * Adding new user to mysql database
      * returns user details
@@ -145,6 +169,23 @@ public function getPointsByUid($uid) {
         return $rows;
 }
 
+
+
+public function getRatingByUid($uid) {
+   $result = mysql_query("SELECT * FROM rating WHERE uid = '$uid'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+          $rows = Array();
+        if ($no_of_rows > 0) {
+  
+    while($row = mysql_fetch_array($result)){
+        array_push($rows, $row);
+      }
+           
+      
+        }
+        return $rows;
+}
 
  /**
      * Checks whether the email is valid or fake

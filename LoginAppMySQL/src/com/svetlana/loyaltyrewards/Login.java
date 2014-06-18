@@ -86,8 +86,7 @@ public class Login extends Activity {
 	             if((int)data.get("result")==RESULT_OK){
 	             pDialog.setMessage("Loading User Panel");
 	             pDialog.setTitle("Loyalty Points");
-				 Toast.makeText(getApplicationContext(),
-			              "Logged in Sucessfully",Toast.LENGTH_SHORT).show();
+	             loginErrorMsg.setText("");
 				 Intent upanel = new Intent(getApplicationContext(), Main.class);
                  upanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                  pDialog.dismiss();
@@ -96,9 +95,7 @@ public class Login extends Activity {
 	             }
 	             else{
 	            	 pDialog.dismiss();
-	               	 Toast.makeText(Login.this, "Login failed",
-				     Toast.LENGTH_LONG).show();
-	                    loginErrorMsg.setText("Incorrect username/password");
+	            	 loginErrorMsg.setText("Incorrect username/password");
 	             }
 				 break;
 			 default:
@@ -145,6 +142,7 @@ public class Login extends Activity {
         btnLogin = (Button) findViewById(R.id.login);
         passreset = (Button)findViewById(R.id.passres);
         loginErrorMsg = (TextView) findViewById(R.id.loginErrorMsg);
+        loginErrorMsg.setText("");
         mlogin = this;
         passreset.setOnClickListener(new View.OnClickListener() {
         public void onClick(View view) {
@@ -169,6 +167,7 @@ public class Login extends Activity {
 
                 if (  ( !inputEmail.getText().toString().equals("")) && ( !inputPassword.getText().toString().equals("")) )
                 {
+                	Toast.makeText(getApplicationContext(), "Logging in ", Toast.LENGTH_SHORT).show();
                 	 if( mIsBound ) {
      			    	// Create Message
      			    	Message msg = Message.obtain(null, SYNC_DB);
@@ -183,7 +182,7 @@ public class Login extends Activity {
      			    	catch(RemoteException re) {
      			    		Log.e(TAG,re.toString());
      			    	}
-     					Toast.makeText(getApplicationContext(), "Logging in ", Toast.LENGTH_LONG).show();
+     					
      			    }
                  
                 }

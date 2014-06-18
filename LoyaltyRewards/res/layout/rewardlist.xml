@@ -4,37 +4,32 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-   
+
+ <ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+     android:id="@+id/rewardScroll"
+    android:scrollbars="none">
 
         <TableLayout
             android:id="@+id/tableLayout1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="318dp"
+            android:layout_height="86dp"
             android:padding="10dp"
             android:shrinkColumns="*"
-            android:stretchColumns="*" >  </TableLayout>
-<!-- 
-    <Button
-            android:layout_width="320dp"
+            android:stretchColumns="*" >
+  
+        </TableLayout>
+        
+</ScrollView>
+   
+      <TextView
+            android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:textColor="#FFFFFF"
-            android:text="Back To Main Menu"
-            android:id="@+id/bktomenu"
-            android:layout_below="@+id/pword"
-            android:textSize="13dp"/> -->
+            android:id="@+id/rewardErrorMsg"
+             android:layout_below="@+id/rewardScroll"
+            android:layout_alignParentLeft="true"
+            android:textSize="13sp"
+            />
 </RelativeLayout> 
-
-<!-- <LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-  
-  Screen Design for Rewards Info
-  <TextView android:text="YOUR REWARDS"
-  			android:padding="15dip"
-  			android:textSize="18dip"
-  			android:layout_width="fill_parent"
-  			android:layout_height="wrap_content"/>
-    
-</LinearLayout> -->
